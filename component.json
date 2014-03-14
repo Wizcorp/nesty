@@ -1,0 +1,8 @@
+{
+	"name": "nesty",
+	"description": "Safely set and get values on an object, regardless of depth",
+	"version": "0.1.0",
+	"scripts": [
+		"index.js"
+	]
+}
