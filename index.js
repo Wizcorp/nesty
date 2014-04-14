@@ -77,6 +77,8 @@ function set(o, path, value) {
 
 	if (path.length > 1) {
 		set(o[key], path.concat().splice(1, path.length - 1), value);
+	} else {
+		nSet(o, key, value);
 	}
 
 	return o;
