@@ -1,8 +1,8 @@
-function nSet(o, key, value) {
-	if (typeof o.set === 'function') {
-		o.set(key, value);
+function nDel(o, key) {
+	if (typeof o.del === 'function') {
+		o.del(key);
 	} else {
-		o[key] = value;
+		delete o[key];
 	}
 }
 
@@ -12,6 +12,28 @@ function nInc(value, amount) {
 	} else {
 		value += amount;
 	}
+}
+
+function nSet(o, key, value) {
+	if (typeof o.set === 'function') {
+		o.set(key, value);
+	} else {
+		o[key] = value;
+	}
+}
+
+function del(o, path) {
+	var key = path[0];
+
+	if (!o.hasOwnProperty(key)) {
+		return undefined;
+	}
+
+	if (path.length === 1) {
+		return nDel(o, key);
+	}
+
+	return del(o[key], path.concat().splice(1, path.length - 1));
 }
 
 function get(o, path) {
@@ -60,6 +82,7 @@ function set(o, path, value) {
 	return o;
 }
 
+exports.del = del;
 exports.get = get;
 exports.inc = inc;
 exports.set = set;
